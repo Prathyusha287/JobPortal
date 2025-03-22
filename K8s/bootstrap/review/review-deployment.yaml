@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review
+  labels:
+    app: review
+spec:
+  replicas: 1
+  templates:
+    metadata:
+      name: review
+      labels:
+        app: review
+    spec:
+      containers:
+        - name: review
+          image: prathyusha287/reviewms:latest
+          imagePullPolicay: Always
+          ports:
+            - containerPort: 8083
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: ks
+      restartPolicy: Always
+  selector:
+    matchlabels:
+      app: review
